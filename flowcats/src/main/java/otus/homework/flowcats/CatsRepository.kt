@@ -9,15 +9,9 @@ class CatsRepository(
     private val refreshIntervalMs: Long = 5000
 ) {
 
-    var counter = 0
-
     fun listenForCatFacts() = flow {
         while (true) {
             val latestNews = catsService.getCatFact()
-
-            counter++
-            if (counter % 2 == 0) { throw RuntimeException("Ha-ha") }
-
             emit(latestNews)
             delay(refreshIntervalMs)
         }
